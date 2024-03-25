@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System.Xml;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class QuestManager : MonoBehaviour
@@ -41,8 +42,9 @@ public class QuestManager : MonoBehaviour
         {
             string questName = questNode.SelectSingleNode("Name").InnerText;
             string questDescription = questNode.SelectSingleNode("Description").InnerText;
+            int questLevel = Convert.ToInt32(questNode.Attributes["level"].Value);
 
-            var quest = new Quest(questName, questDescription, new List<QuestObjective>());
+            var quest = new Quest(questName, questDescription, questLevel, new List<QuestObjective>());
 
             // Get all objectives for the current quest
             XmlNodeList objectiveNodes = questNode.SelectNodes("Objectives/Objective");
@@ -170,8 +172,9 @@ public class QuestManager : MonoBehaviour
     
     public void StartQuest()
     {
-        int questIndex = 1; // Random.Range(0, quests.Count);
-        activeQuest = quests[questIndex];
+        int currentLevel = SceneManager.GetActiveScene().buildIndex ;
+        
+        activeQuest = quests.Find(q => q.level == currentLevel);
         Debug.Log("Quest started: " + activeQuest.name);
         currentObjective = activeQuest.objectives[0];
         Debug.Log("Objective: " + currentObjective.description);

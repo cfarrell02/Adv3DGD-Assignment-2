@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Quests>
-    <Quest>
+    <Quest level="1">
         <Name>The Lost Treasure</Name>
         <Description>Explore the ancient ruins and retrieve the lost artifact.</Description>
         <Objectives>
@@ -24,7 +24,7 @@
             </Objective>
         </Objectives>
     </Quest>
-    <Quest>
+    <Quest level="3">
         <Name>Retrieve the Ancient Tome</Name>
         <Description>Find the ancient tome hidden deep within the forest.</Description>
         <Objectives>

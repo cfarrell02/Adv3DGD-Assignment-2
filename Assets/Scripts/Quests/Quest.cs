@@ -5,13 +5,15 @@ public class Quest
 {
     public string name;
     public string description;
+    public int level;
     public List<QuestObjective> objectives;
     
-    public Quest(string name, string description, List<QuestObjective> objectives)
+    public Quest(string name, string description, int level, List<QuestObjective> objectives)
     {
         this.name = name;
         this.description = description;
         this.objectives = objectives;
+        this.level = level;
     }
 }
 
@@ -23,7 +25,6 @@ public class QuestObjective
         GO,
         TAKE,
         TALK,
-        GIVE
     }
     
     public string description;

@@ -528,7 +528,7 @@ Transform:
   m_GameObject: {fileID: 304464229}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.67, y: 1.014, z: 9.44}
+  m_LocalPosition: {x: 28.83, y: 1.014, z: 28.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1293,6 +1293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   space: 20
   testItem: {fileID: 11400000, guid: 5d2a2ae69cf16674984e31db5e9cc15a, type: 2}
+  money: 0
   selectedIndex: 0
 --- !u!114 &1358846724
 MonoBehaviour:

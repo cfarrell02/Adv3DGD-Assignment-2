@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -9,6 +11,7 @@ public class Inventory : MonoBehaviour
     public int space = 20;
 
     public Item testItem;
+    public int money = 0;
     
     public int selectedIndex = 0;
     
@@ -19,7 +22,14 @@ public class Inventory : MonoBehaviour
         Add(testItem);
         
     }
-    
+
+    private void OnGUI()
+    {
+        int screenWidth = Screen.width;
+        int screenHeight = Screen.height;
+        GUI.Label(new Rect(screenWidth - 100, 10, 100, 20), "Money: " + money);
+    }
+
     public bool Add(Item item)
     {
         if (items.Count >= space)
@@ -33,7 +43,7 @@ public class Inventory : MonoBehaviour
             var itemTuple = GetItem(item.name);
             if (item.maxAmount > itemTuple.amount)
             {
-                itemTuple.amount++;
+                ModifyAmount(item, 1);
                 return true;
             }
             else
@@ -52,6 +62,21 @@ public class Inventory : MonoBehaviour
         return true;
     }
     
+    public void AddMoney(int amount)
+    {
+        money += amount;
+    }
+    
+    public bool RemoveMoney(int amount)
+    {
+        if (money >= amount)
+        {
+            money -= amount;
+            return true;
+        }
+        return false;
+    }
+    
     public void Remove(Item item)
     {
         if (Contains(item))
@@ -59,7 +84,7 @@ public class Inventory : MonoBehaviour
             var itemTuple = GetItem(item.name);
             if (itemTuple.amount > 1)
             {
-                itemTuple.amount--;
+                ModifyAmount(item, -1);
             }
             else
             {
@@ -81,6 +106,17 @@ public class Inventory : MonoBehaviour
     public (int amount,Item item) GetItem(string name)
     {
         return items.FirstOrDefault(i => i.item.name == name);
+    }
+    
+    private void ModifyAmount(Item item, int amount)
+    {
+        for(int i = 0; i < items.Count; i++)
+        {
+            if (items[i].item.name == item.name)
+            {
+                items[i] = (items[i].amount + amount, items[i].item);
+            }
+        }
     }
 
     // Update is called once per frame

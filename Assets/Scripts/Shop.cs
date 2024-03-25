@@ -35,7 +35,7 @@ public class Shop : MonoBehaviour
             GUI.Box(new Rect(80, 100, 400, 500), "Shop");
             //Instructions
             GUI.Label(new Rect(100, 120, 400, 20), "Press E to leave shop");
-            GUI.Label(new Rect(100, 140, 400, 20), "Press T and G to navigate");
+            GUI.Label(new Rect(100, 140, 400, 20), "Press Tab to change item");
             GUI.Label(new Rect(100, 160, 400, 20), "Press Enter to buy");
             GUI.Label(new Rect(100, 180, 400, 20), "Press Q to sell");
             
@@ -82,16 +82,8 @@ public class Shop : MonoBehaviour
         {
             return;
         }
-        
-        if (Input.GetKeyDown(KeyCode.T ))
-        {
-            selectedIndex--;
-            if (selectedIndex < 0)
-            {
-                selectedIndex = allItems.Count - 1;
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.G))
+
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             selectedIndex++;
             if (selectedIndex >= allItems.Count)
@@ -100,8 +92,72 @@ public class Shop : MonoBehaviour
             }
         }
         
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Buy();
+        }
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Sell();
+        }
         
         
+        
+    }
+
+    void Sell()
+    {
+        var item = allItems[selectedIndex];
+        var stockItem = stock.Find(x => x.item.name == item.name);
+        int index = stock.FindIndex(x => x.item.name == item.name);
+
+        var playerItem = playerInventory.GetItem(item.name);
+        
+        if (playerItem.amount > 0)
+        {
+            playerInventory.Remove(item);
+            playerInventory.AddMoney(item.price);
+            if (stockItem.item == null)
+                stock.Add(new ShopItem {amount = 1, item = item});
+            else
+            {
+                stockItem.amount++;
+                stock[index] = stockItem;
+            }
+
+            Debug.Log("Sold");
+            return;
+        }
+        Debug.Log("You don't have any of that item");
+    }
+    
+    void Buy()
+    {
+        var item = allItems[selectedIndex];
+        var stockItem = stock.Find(x => x.item.name == item.name);
+        int index = stock.FindIndex(x => x.item.name == item.name);
+        
+        var playerItem = playerInventory.GetItem(item.name);
+        
+        if (stockItem.amount > 0 && playerItem.amount < 10 && playerInventory.money >= item.price)
+        {
+            bool sold = playerInventory.RemoveMoney(item.price);
+            if (!sold)
+            {
+                Debug.Log("You don't have enough money");
+                return;
+            }
+            playerInventory.Add(item);
+            stockItem.amount--;
+            stock[index] = stockItem;
+            if(stockItem.amount == 0)
+            {
+                stock.RemoveAt(index);
+            } 
+            Debug.Log("Bought");
+            return;
+        }
+        Debug.Log("You can't buy that item");
     }
     
     

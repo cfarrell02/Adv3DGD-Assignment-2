@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     public int space = 20;
 
     public Item testItem;
-    public int money = 0;
+    public int money = 0, xp = 0;
     
     public int selectedIndex = 0;
     
@@ -28,6 +28,7 @@ public class Inventory : MonoBehaviour
         int screenWidth = Screen.width;
         int screenHeight = Screen.height;
         GUI.Label(new Rect(screenWidth - 100, 10, 100, 20), "Money: " + money);
+        GUI.Label(new Rect(screenWidth - 200, 10, 100, 20), "XP: " + xp);
     }
 
     public bool Add(Item item)
@@ -77,6 +78,11 @@ public class Inventory : MonoBehaviour
         return false;
     }
     
+    public void AddXP(int amount)
+    {
+        xp += amount;
+    }
+    
     public void Remove(Item item)
     {
         if (Contains(item))
@@ -101,6 +107,11 @@ public class Inventory : MonoBehaviour
     public bool Contains(Item item)
     {
         return items.Select(i => i.item.name).Contains(item.name);
+    }
+    
+    public bool Contains(string name)
+    {
+        return items.Select(i => i.item.name).Contains(name);
     }
     
     public (int amount,Item item) GetItem(string name)

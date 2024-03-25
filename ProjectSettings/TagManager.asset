@@ -7,6 +7,9 @@ TagManager:
   - CinemachineTarget
   - Collectable
   - InventoryIcon
+  - NPC
+  - Waypoint
+  - Healthpack
   layers:
   - Default
   - TransparentFX

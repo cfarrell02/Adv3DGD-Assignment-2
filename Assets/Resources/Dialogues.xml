@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<dialogues>
+    <character name="Village Elder">
+        <dialogue id="00" content="Welcome, traveler! What brings you to our humble village?">
+            <choice content="Greetings! I seek knowledge about an ancient relic. Do you have any information?" target="1"/>
+            <choice content="Hello. I'm on a quest. Can you provide me with guidance?" target="2"/>
+        </dialogue>
+        <dialogue id="01" content="Ah, a quest, you say? Tell me more about it.">
+            <choice content="I seek an ancient tome hidden deep within the forest." target="2"/>
+            <choice content="Cut to the chase. Do you know where the forbidden forest is?" target="3"/>
+            <choice content="I'd rather not discuss it." target="-1"/>
+        </dialogue>
+        <dialogue id="02" content="An ancient tome, you say? Such artifacts are not to be taken lightly.">
+            <choice content="Indeed. I must locate the entrance to the forbidden forest." target="3"/>
+            <choice content="I appreciate your concern, but I must go." target="-1"/>
+        </dialogue>
+        <dialogue id="03" content="The entrance to the forbidden forest? It lies beyond the northern edge of our village.">
+            <choice content="Thank you for your guidance. Farewell." target="-2"/>
+            <choice content="I'm grateful for your help. Goodbye." target="-2"/>
+        </dialogue>
+    </character>
+    <character name="Villager">
+        <dialogue id="00" content="Greetings! What brings you to our village?">
+            <choice content="Hello! I seek information about a quest. Can you assist me?" target="1"/>
+            <choice content="I'm just exploring. No need for help, thanks." target="-1"/>
+        </dialogue>
+        <dialogue id="01" content="A quest, you say? What sort of quest are you on?">
+            <choice content="I'm searching for an ancient tome hidden within the forest." target="2"/>
+            <choice content="It's a personal matter. I'd rather not discuss it." target="-1"/>
+        </dialogue>
+        <dialogue id="02" content="An ancient tome? That sounds intriguing.">
+            <choice content="Yes, it is. Do you know where I can find the entrance to the forbidden forest?" target="3"/>
+            <choice content="Perhaps another time. Thank you anyway." target="-1"/>
+        </dialogue>
+        <dialogue id="03" content="The entrance to the forbidden forest? You'll find it just beyond the village's northern boundary.">
+            <choice content="Thank you for your help. Farewell." target="-2"/>
+            <choice content="I appreciate your assistance. Goodbye." target="-2"/>
+        </dialogue>
+    </character>
+</dialogues>

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3332179b84855cb4d8bf60c75d8e5a74, type: 3}
+  m_Name: Ancient Tome
+  m_EditorClassIdentifier: 
+  name: Ancient Tome
+  description: Ancient Tome
+  itemType: 0
+  maxAmount: 1
+  price: 200
+  itemPrefab: {fileID: 3835581919795008873, guid: b1ef9bf59dfeab74aaffea53381c86da, type: 3}
+  icon: {fileID: 0}

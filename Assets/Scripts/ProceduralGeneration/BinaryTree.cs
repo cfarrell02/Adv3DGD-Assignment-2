@@ -24,6 +24,8 @@ public class BinaryTree : MonoBehaviour
     private GameObject[] allObjectsInScene;
     
     public GameObject target, NPC;
+    
+    public GameObject entrance, hiddenChamber, egyptianArtifact;
 
 
 
@@ -51,7 +53,17 @@ public class BinaryTree : MonoBehaviour
         // ceiling.transform.localScale = new Vector3((width) * wallSize, 1 + wallHeight, (height) * wallSize);
         // ceiling.transform.position = new Vector3(-(wallSize+.1f)/2, wallHeight, -(wallSize+.1f)/2);
         //
+        
+        var entrancePos = new Vector3(-(width * wallSize) / 2, 1, -(height * wallSize) / 2);
+        GameObject[] questLocatons = {entrance, hiddenChamber, egyptianArtifact};
 
+        foreach (GameObject place in questLocatons)
+        {
+            int randomX = Random.Range(0, width), randomY = Random.Range(0, height);
+            randomX *= wallSize;
+            randomY *= wallSize;
+            place.transform.position = entrancePos + new Vector3(randomX, 0, randomY);
+        }
 
     }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -102,6 +103,15 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+    
+    public void NextLevel()
+    {
+        int level = int.Parse(PlayerPrefs.GetString("level"));
+        level++;
+        PlayerPrefs.SetString("level", level.ToString());
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(sceneIndex + 1);
     }
 
 

@@ -24,6 +24,30 @@
             </Objective>
         </Objectives>
     </Quest>
+    <Quest level="2">
+        <Name>Finding the Missing Heir</Name>
+        <Description>Search for the missing heir of the royal family.</Description>
+        <Objectives>
+            <Objective>
+                <Description>Speak to the royal advisor</Description>
+                <Action>TALK</Action>
+                <Target>Royal Advisor</Target>
+                <XP>100</XP>
+            </Objective>
+            <Objective>
+                <Description>Investigate the abandoned castle</Description>
+                <Action>GO</Action>
+                <Target>Abandoned Castle</Target>
+                <XP>150</XP>
+            </Objective>
+            <Objective>
+                <Description>Find the missing heir in the dungeon</Description>
+                <Action>TAKE</Action>
+                <Target>Missing Heir</Target>
+                <XP>200</XP>
+            </Objective>
+        </Objectives>
+    </Quest>
     <Quest level="3">
         <Name>Retrieve the Ancient Tome</Name>
         <Description>Find the ancient tome hidden deep within the forest.</Description>

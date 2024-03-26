@@ -84,6 +84,13 @@ public class QuestManager : MonoBehaviour
             timer += Time.deltaTime;
             if (timer > 5)
             {
+                var validQuests = quests.Where(q => q.level == SceneManager.GetActiveScene().buildIndex).ToList();
+                if (validQuests.Count <= 0)
+                {
+                    GameManager.Instance.NextLevel();
+                    return;
+                }
+                
                 StartQuest();
                 timer = 0;
             }

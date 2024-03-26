@@ -39,7 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
                 }
             }
         }
-        else
+        else if(waypoints.Length > 0)
         {
             agent.SetDestination(waypoints[currentWaypointIndex].transform.position);
             if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].transform.position) < 4)

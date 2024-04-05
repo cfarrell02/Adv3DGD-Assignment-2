@@ -55,15 +55,8 @@ public class BinaryTree : MonoBehaviour
         //
         
         var entrancePos = new Vector3(-(width * wallSize) / 2, 1, -(height * wallSize) / 2);
-        GameObject[] questLocatons = {entrance, hiddenChamber, egyptianArtifact};
 
-        foreach (GameObject place in questLocatons)
-        {
-            int randomX = Random.Range(0, width), randomY = Random.Range(0, height);
-            randomX *= wallSize;
-            randomY *= wallSize;
-            place.transform.position = entrancePos + new Vector3(randomX, 0, randomY);
-        }
+
 
     }
 
@@ -71,22 +64,25 @@ public class BinaryTree : MonoBehaviour
 
     void DrawGrid()
     {
-        for(int x = 0; x <= width; x++)
+        GameObject[] questLocations = {entrance, hiddenChamber, egyptianArtifact};
+        int questIndex = 0;
+
+        for (int x = 0; x <= width; x++)
         {
-            for(int y = 0; y <= height; y++)
+            for (int y = 0; y <= height; y++)
             {
                 if (y < height)
                 {
                     float vWallSize = verticalWall.transform.localScale.z;
                     float xOffset = -(width * vWallSize / 2);
                     float yOffset = -(height * vWallSize / 2);
-                    
-                    gridObjectsV[x,y] = Instantiate(verticalWall, new Vector3(
-                        -vWallSize/2 + x*wallSize + xOffset, wallSize/2,y*vWallSize + yOffset), Quaternion.identity);
-                    
-                    gridObjectsV[x,y].SetActive(true);
-                    gridObjectsV[x,y].name = "VWall " + x + ", " + y;
-                    gridObjectsV[x,y].tag = "Wall";
+
+                    gridObjectsV[x, y] = Instantiate(verticalWall, new Vector3(
+                        -vWallSize / 2 + x * wallSize + xOffset, wallSize / 2, y * vWallSize + yOffset), Quaternion.identity);
+
+                    gridObjectsV[x, y].SetActive(true);
+                    gridObjectsV[x, y].name = "VWall " + x + ", " + y;
+                    gridObjectsV[x, y].tag = "Wall";
                 }
 
                 if (x < width)
@@ -94,21 +90,34 @@ public class BinaryTree : MonoBehaviour
                     float hWallSize = horizontalWall.transform.localScale.x;
                     float xOffset = -(width * hWallSize / 2);
                     float yOffset = -(height * hWallSize / 2);
-                    
-                    
-                    gridObjectsH[x,y] = Instantiate(horizontalWall, new Vector3(
-                        x*hWallSize + xOffset, wallSize/2, -hWallSize/2 + y*wallSize + yOffset), Quaternion.identity);
-                    
-                    gridObjectsH[x,y].SetActive(true);
-                    gridObjectsH[x,y].name = "HWall " + x + ", " + y;
-                    gridObjectsH[x,y].tag = "Wall";
-                    
+
+                    gridObjectsH[x, y] = Instantiate(horizontalWall, new Vector3(
+                        x * hWallSize + xOffset, wallSize / 2, -hWallSize / 2 + y * wallSize + yOffset), Quaternion.identity);
+
+                    gridObjectsH[x, y].SetActive(true);
+                    gridObjectsH[x, y].name = "HWall " + x + ", " + y;
+                    gridObjectsH[x, y].tag = "Wall";
                 }
-                
-                
+
+                // Place down the quest locations sequentially with gaps of 5
+                if (x % 5 == 0 && y % 5 == 0 && questIndex < questLocations.Length)
+                {
+                    if (questIndex == 0)
+                    {
+                        var player = GameObject.FindGameObjectWithTag("Player");
+                        player.transform.position = new Vector3(
+                            x * wallSize - (width * wallSize) / 2 + wallSize, 1, y * wallSize - (height * wallSize) / 2);
+                    }
+                    
+                    GameObject questLocation = questLocations[questIndex];
+                    questIndex++;
+                    questLocation.transform.position = new Vector3(
+                        x * wallSize - (width * wallSize) / 2 + wallSize, 1, y * wallSize - (height * wallSize) / 2);   
+                }
             }
         }
     }
+
 
 
     void GenerateMazeBinary()
@@ -135,6 +144,35 @@ public class BinaryTree : MonoBehaviour
             }
         }       
     }
+    
+    // void GenerateMazeSidewinder()
+    // {
+    //     for (int row = 0; row < height-1; row++)
+    //     {
+    //         for (int col = 0; col < width-1; col++)
+    //         {
+    //             bool shouldCloseOut = (row > 0 && col < width - 1) && (Random.Range(0, 2) == 0);
+    //
+    //             if (shouldCloseOut)
+    //             {
+    //                 grid[col, row] = Direction.North;
+    //                 continue;
+    //             }
+    //
+    //             bool shouldMoveEast = (col < width - 1) || (row > 0 && col == width - 1);
+    //
+    //             if (shouldMoveEast)
+    //             {
+    //                 grid[col, row] = Direction.East;
+    //             }
+    //             else
+    //             {
+    //                 grid[col, row] = Direction.North;
+    //             }
+    //         }
+    //     }
+    // }
+
 
     void DisplayGrid()
     {

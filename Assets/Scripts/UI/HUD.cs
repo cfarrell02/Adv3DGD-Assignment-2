@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
@@ -12,6 +13,7 @@ public class HUD : MonoBehaviour
     public Color lowHealth, highHealth;
     
     private Health playerHealth;
+    private bool isPaused = false;
     
     
     // Start is called before the first frame update
@@ -34,6 +36,11 @@ public class HUD : MonoBehaviour
 
         UpdateInventory();
         UpdateHealthBar();
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
         
 
     }
@@ -88,6 +95,53 @@ public class HUD : MonoBehaviour
             title.tag = "InventoryIcon";
             
         }
+    }
+    
+    public void TogglePause()
+    {
+        isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0 : 1;
+        
+        if (isPaused)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            CreateButton((button => QuitGame()), "Quit");
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            var quitButton = GameObject.Find("QuitButton");
+            if (quitButton != null)
+            {
+                Destroy(quitButton);
+            }
+        }
+    }
+
+    private void CreateButton( Action<Button> action, string name)
+    {
+        var button = new GameObject();
+        button.layer = 5;
+        var buttoncmpt = button.AddComponent<Button>();
+        buttoncmpt.onClick.AddListener(() =>
+        {
+            action(buttoncmpt);
+        });
+        var text = button.AddComponent<TextMeshProUGUI>();
+        text.text = name;
+        text.fontSize = 24;
+        button.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        button.transform.parent = transform;
+        button.name = $"{name}Button";
+    }
+
+    private void QuitGame()
+    {
+        Time.timeScale = 1;
+        GameManager.Instance.SavePlayerData();
+        SceneManager.LoadScene(0);
     }
 
     private Sprite GenerateIcon(Item entity, int index)

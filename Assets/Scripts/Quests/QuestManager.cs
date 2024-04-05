@@ -182,6 +182,10 @@ public class QuestManager : MonoBehaviour
         int currentLevel = SceneManager.GetActiveScene().buildIndex ;
         
         activeQuest = quests.Find(q => q.level == currentLevel);
+        //Remove the quest from the list so it doesn't get repeated
+        quests.Remove(activeQuest);
+        
+        
         Debug.Log("Quest started: " + activeQuest.name);
         currentObjective = activeQuest.objectives[0];
         Debug.Log("Objective: " + currentObjective.description);

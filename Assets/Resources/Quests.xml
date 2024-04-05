@@ -25,8 +25,8 @@
         </Objectives>
     </Quest>
     <Quest level="2">
-        <Name>Finding the Missing Heir</Name>
-        <Description>Search for the missing heir of the royal family.</Description>
+        <Name>Finding the Missing Amulet</Name>
+        <Description>Search for the missing amulet of the royal family.</Description>
         <Objectives>
             <Objective>
                 <Description>Speak to the royal advisor</Description>
@@ -41,9 +41,9 @@
                 <XP>150</XP>
             </Objective>
             <Objective>
-                <Description>Find the missing heir in the dungeon</Description>
+                <Description>Find the missing amulet in the castle</Description>
                 <Action>TAKE</Action>
-                <Target>Missing Heir</Target>
+                <Target>Missing Amulet</Target>
                 <XP>200</XP>
             </Objective>
         </Objectives>

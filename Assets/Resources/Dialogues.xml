@@ -37,4 +37,27 @@
             <choice content="I appreciate your assistance. Goodbye." target="-2"/>
         </dialogue>
     </character>
+    <character name="Royal Advisor">
+        <dialogue id="00" content="Greetings, traveler. How may I assist you?">
+            <choice content="Hello! I'm on a quest. Can you provide me with guidance?" target="1"/>
+            <choice content="I'm just passing through. No need for help, thanks." target="-1"/>
+        </dialogue>
+        <dialogue id="01" content="A quest, you say? I actually have an issue that requires your attention.">
+            <choice content="I'm listening. What do you need me to do?" target="2"/>
+            <choice content="I'm sorry, but I'm preoccupied with my own quest." target="-1"/>
+        </dialogue>
+        <dialogue id="02" content="I need you to find the missing amulet of the royal family.">
+            <choice content="Understood. Where should I begin my search?" target="3"/>
+            <choice content="The missing amulet? What happened?" target="4"/>
+            <choice content="I'm afraid I can't help you with that. Goodbye." target="-1"/>
+        </dialogue>
+        <dialogue id="03" content="You should start by investigating the abandoned castle to the east of the village.">
+            <choice content="Thank you for the information. I'll head there now." target="-2"/>
+            <choice content="I appreciate your guidance. Farewell." target="-2"/>
+        </dialogue>
+        <dialogue id="04" content="The amulet was stolen from the royal family's treasury. We suspect it was taken by an outsider.">
+            <choice content="I'll do my best to recover the amulet. Where should I start?" target="3"/>
+            <choice content="I'm sorry to hear that. I'll see what I can do." target="-1"/>
+        </dialogue>
+    </character>
 </dialogues>

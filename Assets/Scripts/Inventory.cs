@@ -21,6 +21,18 @@ public class Inventory : MonoBehaviour
     {
         Add(testItem);
         
+        int prefsXP = PlayerPrefs.GetInt("xp", 0);
+        xp = prefsXP != 0 ? prefsXP : 0;
+        int prefsMoney = PlayerPrefs.GetInt("money", 0);
+        money = prefsMoney != 0 ? prefsMoney : 0;
+        
+        string itemsText = PlayerPrefs.GetString("items", "");
+        if (itemsText != "")
+        {
+            items = JsonUtility.FromJson<InventorySaveData>(itemsText).GetItems();
+
+        }
+        
     }
 
     private void OnGUI()
@@ -174,6 +186,21 @@ public class Inventory : MonoBehaviour
                     if (item.amount <= 0)
                     {
                         items.Remove(item);
+                    }
+                }else if (item.item.itemType == Item.ItemType.Weapon)
+                {
+                    RaycastHit hit;
+                    if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 10, LayerMask.GetMask("AttackRaycast")))  
+                    {
+                        if (hit.collider.CompareTag("NPC"))
+                        {
+                            hit.collider.GetComponent<Health>().TakeDamage(10);
+                            //     item.amount--;
+                            //     if (item.amount <= 0)
+                            //     {
+                            //         items.Remove(item);
+                            //     }
+                        }
                     }
                 }
             }

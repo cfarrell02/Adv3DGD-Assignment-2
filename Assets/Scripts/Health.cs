@@ -7,12 +7,21 @@ public class Health : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public bool isDead = false;
-    
+    public bool isPlayer = false;
+
     
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        isPlayer = gameObject.CompareTag("Player");
+        
+        if (isPlayer)
+        {
+            int health = PlayerPrefs.GetInt("health", maxHealth);
+            currentHealth = health != 0 ? health : maxHealth;
+        }
+
         
     }
     
@@ -23,6 +32,17 @@ public class Health : MonoBehaviour
         {
             Die();
         }
+
+        var ddManager = GameObject.FindObjectOfType<DynamicDifficultyManager>();
+        if(ddManager != null)
+        {
+            if (isPlayer)
+                ddManager.userSkillLevel--;
+            else
+                ddManager.userSkillLevel++;
+            
+        }
+
     }
     
     public void Die()
@@ -43,6 +63,7 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         
     }
 }

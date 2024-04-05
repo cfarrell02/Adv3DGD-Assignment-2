@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 8508642749638340909}
   - component: {fileID: 4844732975874951470}
   - component: {fileID: 5353996279578778434}
-  m_Layer: 0
+  - component: {fileID: 3846414094125332655}
+  m_Layer: 3
   m_Name: Enemy
   m_TagString: NPC
   m_Icon: {fileID: 0}
@@ -146,3 +147,19 @@ MonoBehaviour:
   chaseDistance: 10
   attackDistance: 2
   attackRate: 1
+--- !u!114 &3846414094125332655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5107706812169726674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45eb8f97b817f24ab3d9c1b613fbe0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  isDead: 0
+  isPlayer: 0
